@@ -1,0 +1,32 @@
+
+- hosts: saber
+  remote_user: root
+
+
+  tasks:
+    #generated password is in /usr/local/etc/ansible/hosts 
+    - name: ensure saber user exists
+      user: name=saber shell=/bin/false password={{saber_password}} state=present update_password=always createhome=no
+    - name: ensure archer user exists
+      user: name=archer shell=/bin/false password={{archer_password}} state=present update_password=always createhome=no
+    - name: ensure lancer user exists
+      user: name=lancer shell=/bin/false password={{lancer_password}} state=present update_password=always createhome=no
+
+    - name: ensure python-pip installed
+      apt: pkg=python-pip state=present
+    - name: ensure python-m2crypto installed
+      apt: pkg=python-m2crypto state=present
+    - name: ensure supervisor installed
+      apt: pkg=supervisor state=present
+    - name: ensure shadowsocks installed
+      pip: name=shadowsocks
+    - name: copy shadowsocks.json
+      copy: src=/usr/local/etc/shadowsocks.json dest=/etc/shadowsocks.json
+      notify: restart supervisor
+    - name: copy supervisor shadowsocks.conf file
+      copy: src=shadowsocks.conf dest=/etc/supervisor/conf.d/shadowsocks.conf
+      notify: restart supervisor
+
+  handlers:
+    - name: restart supervisor
+      service: name=supervisor state=restarted

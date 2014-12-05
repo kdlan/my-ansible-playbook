@@ -1,0 +1,12 @@
+[saber]
+192.168.59.105
+
+[saber:vars]
+#python -c "from passlib.hash import sha512_crypt; import getpass; print sha512_crypt.encrypt('olfo12a4xlm')"
+saber_password=$6$rounds=100000$4xYasOhC5VgxRj2U$TiFKGxDmCWHXjW78YAC8oeNgnNHP99NuS/V7rKtWnQFowSbmuovJKzM/pWZM80O.eLPDPl/.SpDN94Ly2nvkz.
+#python -c "from passlib.hash import sha512_crypt; import getpass; print sha512_crypt.encrypt('z;7n4vas2dk')"
+archer_password=123
+#python -c "from passlib.hash import sha512_crypt; import getpass; print sha512_crypt.encrypt('z6,5v9njahi5')"
+lancer_password=123
+
+
